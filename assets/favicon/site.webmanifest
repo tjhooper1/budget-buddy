@@ -1,19 +1,35 @@
 {
   "name": "Budget Buddy",
   "short_name": "Budget Buddy",
+  "description": "Calculate your daily budget based on your income and next pay date",
+  "start_url": "/budget-buddy/",
+  "scope": "/budget-buddy/",
   "icons": [
     {
-      "src": "/assets/favicon/android-chrome-192x192.png",
+      "src": "/budget-buddy/assets/favicon/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/assets/favicon/android-chrome-512x512.png",
+      "src": "/budget-buddy/assets/favicon/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "theme_color": "#4361ee",
   "background_color": "#f8f9fa",
-  "display": "standalone"
+  "display": "standalone",
+  "orientation": "portrait",
+  "categories": ["finance", "utilities"],
+  "screenshots": [
+    {
+      "src": "/budget-buddy/assets/screenshots/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "prefer_related_applications": false
 }

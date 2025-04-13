@@ -1,14 +1,14 @@
 const CACHE_NAME = 'budget-buddy-v1';
 const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/scripts.js',
-    '/assets/favicon/favicon-16x16.png',
-    '/assets/favicon/favicon-32x32.png',
-    '/assets/favicon/apple-touch-icon.png',
-    '/assets/favicon/android-chrome-192x192.png',
-    '/assets/favicon/android-chrome-512x512.png',
+    '/budget-buddy/',
+    '/budget-buddy/index.html',
+    '/budget-buddy/styles.css',
+    '/budget-buddy/scripts.js',
+    '/budget-buddy/assets/favicon/favicon-16x16.png',
+    '/budget-buddy/assets/favicon/favicon-32x32.png',
+    '/budget-buddy/assets/favicon/apple-touch-icon.png',
+    '/budget-buddy/assets/favicon/android-chrome-192x192.png',
+    '/budget-buddy/assets/favicon/android-chrome-512x512.png',
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'
 ];
@@ -40,6 +40,16 @@ self.addEventListener('activate', (event) => {
 
 // Fetch event - serve from cache, fall back to network
 self.addEventListener('fetch', (event) => {
+    // Handle GitHub Pages subdirectory
+    const url = new URL(event.request.url);
+    if (url.origin === location.origin) {
+        // Add /budget-buddy prefix to local resources
+        if (!url.pathname.startsWith('/budget-buddy/')) {
+            url.pathname = `/budget-buddy${url.pathname}`;
+            event.request = new Request(url.href);
+        }
+    }
+
     event.respondWith(
         caches.match(event.request)
             .then((response) => {
