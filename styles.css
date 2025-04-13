@@ -219,7 +219,7 @@ button:active {
   align-items: center;
   gap: 8px;
   width: auto;
-  margin-top: 0;
+  margin-top: 20px;
 }
 
 .install-button:hover {
