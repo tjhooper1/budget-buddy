@@ -200,9 +200,6 @@ button:active {
 }
 
 .install-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
   background: linear-gradient(
     to right,
     var(--primary-color),
