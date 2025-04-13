@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy Budget Buddy to GitHub Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -29,15 +29,24 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      - name: Build and bundle assets
+        run: |
+          # If you need to run any build steps, add them here
+          # For example: npm install && npm run build
+          echo "Building Budget Buddy application..."
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          # Upload the entire repository
+          path: "."
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
