@@ -1,88 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Budget Buddy is a tool that helps you calculate your daily budget based on your income and next pay date."
-    />
-    <meta
-      name="keywords"
-      content="budget, calculator, income, pay date, daily budget"
-    />
-    <title>Budget Buddy</title>
-    <!-- Favicon -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="assets/favicon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="assets/favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="assets/favicon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="assets/favicon/site.webmanifest" />
-    <meta name="theme-color" content="#4361ee" />
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz"></script>
-    <script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.8.0-min.js.gz"></script>
-    <script>
-      window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
-      window.amplitude.init("169e895bcfc75ec3f0e6e8cd6edb36c7", {
-        autocapture: { elementInteractions: true },
-      });
-    </script>
-  </head>
-  <body>
-    <h1><i class="fas fa-wallet"></i> Budget Buddy!</h1>
-    <p>
-      Enter your income and next pay date to see how much you can spend between
-      now and then.
-    </p>
-    <form id="budget-form">
-      <div class="form-row">
-        <div>
-          <label for="income"
-            ><i class="fas fa-money-bill-wave"></i> Current Income:</label
-          >
-          <input
-            type="number"
-            id="income"
-            name="income"
-            placeholder="Enter your income"
-            required
-          />
-        </div>
-        <div>
-          <label for="pay-date"
-            ><i class="far fa-calendar-alt"></i> Next Pay Date:</label
-          >
-          <input type="date" id="pay-date" name="pay-date" required />
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Budget Buddy is a tool that helps you calculate your daily budget based on your income and next pay date." />
+  <meta name="keywords" content="budget, calculator, income, pay date, daily budget" />
+  <title>Budget Buddy</title>
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="assets/favicon/site.webmanifest" />
+  <meta name="theme-color" content="#4361ee" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz"></script>
+  <script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.8.0-min.js.gz"></script>
+  <script>
+    window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
+    window.amplitude.init("169e895bcfc75ec3f0e6e8cd6edb36c7", {
+      autocapture: { elementInteractions: true },
+    });
+  </script>
+</head>
+
+<body>
+  <h1><i class="fas fa-wallet"></i> Budget Buddy!</h1>
+  <p>
+    Enter your income and next pay date to see how much you can spend between
+    now and then.
+  </p>
+  <form id="budget-form">
+    <div class="form-row">
+      <div>
+        <label for="income"><i class="fas fa-money-bill-wave"></i> Current Income:</label>
+        <input type="number" id="income" name="income" placeholder="Enter your income" required />
       </div>
-      <button type="submit"><i class="fas fa-calculator"></i> Calculate</button>
+      <div>
+        <label for="pay-date"><i class="far fa-calendar-alt"></i> Next Pay Date:</label>
+        <input type="date" id="pay-date" name="pay-date" required />
+      </div>
+    </div>
+    <button type="submit"><i class="fas fa-calculator"></i> Calculate</button>
+  </form>
+  <div id="result"></div>
+  <section id="bills">
+    <h2>Add an expense</h2>
+    <form id="bill-form">
+      <input type="text" id="bill-name" placeholder="Name" required />
+      <input type="number" id="bill-amount" placeholder="Amount" required />
+      <button type="submit" id="add-bill"><i class="fas fa-plus"></i> Add</button>
     </form>
-    <div id="result"></div>
-    <script src="scripts.js"></script>
-  </body>
+    <ul id="bill-list"></ul>
+  </section>
+  <script src="scripts.js"></script>
+  <script src="pwa.js"></script>
+</body>
+
 </html>

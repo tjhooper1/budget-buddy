@@ -1,49 +1,28 @@
-// Register Service Worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/budget-buddy/sw.js')
-            .then(registration => {
-                console.log('ServiceWorker registration successful');
-            })
-            .catch(err => {
-                console.log('ServiceWorker registration failed: ', err);
-            });
-    });
-}
-
-// PWA Install Prompt
-let deferredPrompt;
-const installButton = document.createElement('button');
-installButton.style.display = 'none';
-installButton.classList.add('install-button');
-installButton.innerHTML = '<i class="fas fa-download"></i> Install App';
-document.body.appendChild(installButton);
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later
-    deferredPrompt = e;
-    // Show the install button
-    installButton.style.display = 'block';
-});
-
-installButton.addEventListener('click', async () => {
-    if (deferredPrompt) {
-        // Show the install prompt
-        deferredPrompt.prompt();
-        // Wait for the user to respond to the prompt
-        const { outcome } = await deferredPrompt.userChoice;
-        // We've used the prompt, and can't use it again, so clear it
-        deferredPrompt = null;
-        // Hide the install button
-        installButton.style.display = 'none';
-    }
-});
-
 const result = document.getElementById('result');
 let income = 0;
 let daysUntilPay = 0;
+
+// Define billIcons at the top of the file
+const billIcons = {
+    'rent': 'fas fa-house',
+    'mortgage': 'fas fa-house',
+    'utilities': 'fas fa-water',
+    'water': 'fas fa-water',
+    'electricity': 'fas fa-bolt',
+    'gas': 'fas fa-fire',
+    'internet': 'fas fa-wifi',
+    'cable': 'fas fa-tv',
+    'groceries': 'fas fa-shopping-cart',
+    'food': 'fas fa-utensils',
+    'transportation': 'fas fa-car',
+    'car note': 'fas fa-car',
+    'car insurance': 'fas fa-car-crash',
+    'car payment': 'fas fa-car',
+    'phone': 'fas fa-phone',
+    'insurance': 'fas fa-shield-alt',
+    'subscriptions': 'fas fa-credit-card',
+    'other': 'fas fa-money-bill',
+};
 
 document.getElementById('budget-form').addEventListener('submit', function (event) {
     event.preventDefault();
@@ -52,6 +31,9 @@ document.getElementById('budget-form').addEventListener('submit', function (even
 
     income = document.getElementById("income").value;
     const payDate = document.getElementById("pay-date").value;
+
+    setIncome(income);
+    setPayDate(payDate);
 
     daysUntilPay = Math.ceil((new Date(payDate) - new Date()) / (1000 * 60 * 60 * 24));
 
@@ -98,4 +80,104 @@ function showError(message) {
     errorContainer.appendChild(errorParagraph);
     result.appendChild(errorContainer);
 }
+
+function setIncome(income){
+    localStorage.setItem('income', income);
+}
+
+function getIncome(){
+    return localStorage.getItem('income');
+}
+
+function setPayDate(payDate){
+    localStorage.setItem('payDate', payDate);
+}
+
+function getPayDate(){
+    return localStorage.getItem('payDate');
+}
+
+function addBill(){
+    const billName = document.getElementById('bill-name').value;
+    const billAmount = document.getElementById('bill-amount').value;
+    console.log('Adding bill:', billName, billAmount);
+    
+    if (!billName || !billAmount) {
+        console.error('Bill name or amount is empty');
+        return;
+    }
+    
+    const bills = getBills();
+    console.log('Current bills before adding:', bills);
+    bills.push({name: billName, amount: billAmount});
+    setBills(bills);
+
+    document.getElementById('bill-name').value = '';
+    document.getElementById('bill-amount').value = '';
+    updateBills();
+}
+
+function updateBills(){
+    const bills = getBills();
+    console.log('Updating bills UI with:', bills);
+    const billList = document.getElementById('bill-list');
+    
+    if (!billList) {
+        console.error('Bill list element not found');
+        return;
+    }
+    
+    billList.innerHTML = '';
+    bills.forEach(bill => {
+        console.log('Creating bill item for:', bill);
+        const billItem = document.createElement('li');
+        billItem.classList.add('bill-item');
+        billItem.innerHTML = getBillHtml(bill);
+        billList.appendChild(billItem);
+    });
+}
+
+function getBillHtml(bill){
+    return `
+        <i class="${getBillIcon(bill.name)}"></i>
+        <span>${bill.name}</span>
+        <span>${bill.amount}</span>
+    `;
+}
+
+function setBills(bills){
+    localStorage.setItem('bills', JSON.stringify(bills));
+}
+
+function getBills(){
+    const bills = localStorage.getItem('bills');
+    return bills ? JSON.parse(bills) : [];
+}
+
+function getBillIcon(billName){
+    const lowerCaseName = billName.toLowerCase();
+    return billIcons[lowerCaseName] || 'fas fa-money-bill';
+}
+
+// Wrap initialization code in DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM fully loaded');
+    
+    // Add event listener for the bill form
+    const billForm = document.getElementById('bill-form');
+    if (billForm) {
+        console.log('Bill form found');
+        billForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            addBill();
+        });
+    } else {
+        console.error('Bill form not found');
+    }
+    
+    // Initialize bills
+    updateBills();
+});
+
+
 

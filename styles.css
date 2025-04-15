@@ -62,7 +62,7 @@ form {
   padding: 30px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 label {
@@ -122,6 +122,7 @@ button:active {
 #result {
   margin-top: 20px;
   padding: 0 20px;
+  margin-bottom: 20px;
 }
 
 #result div {
@@ -230,3 +231,35 @@ button:active {
 .install-button i {
   font-size: 1.1rem;
 }
+
+#bills {
+  background-color: white;
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#bills h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.bill-item {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 10px;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+
+
