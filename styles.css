@@ -125,7 +125,7 @@ button:active {
   margin-bottom: 20px;
 }
 
-#result div {
+#result {
   background-color: white;
   padding: 30px;
   border-radius: var(--border-radius);
@@ -183,6 +183,58 @@ button:active {
   font-weight: 600;
   font-family: var(--font-body);
   letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.bills-summary {
+  margin-top: 0;
+  margin-bottom: 25px;
+  background-color: transparent;
+  padding: 0 0 20px 0;
+  text-align: left;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.bills-header {
+  font-size: 1.1rem !important;
+  font-weight: 600;
+  margin-bottom: 15px !important;
+  color: var(--text-color);
+  padding-bottom: 8px;
+  text-align: left;
+}
+
+.no-bills-message {
+  text-align: left;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e6e6e6;
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: normal;
+}
+
+.bills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bills-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.bills-list li i {
+  color: var(--primary-color);
+}
+
+.bills-list li:last-child {
+  border-bottom: none;
 }
 
 @media (min-width: 600px) {
@@ -245,21 +297,92 @@ button:active {
 #bills h2 {
   font-size: 1.5rem;
   font-weight: 600;
+  margin-bottom: 10px;
+}
+
+#bill-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#add-bill {
+  grid-column: span 3;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  #bill-form {
+    grid-template-columns: 1fr;
+  }
+  
+  #add-bill {
+    grid-column: 1;
+  }
 }
 
 .bill-item {
   background-color: #f8f9fa;
-  padding: 10px;
+  padding: 15px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
-  display: flex;
-  /* justify-content: space-between; */
-  gap: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  gap: 15px;
   align-items: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: -0.01em;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.bill-item i {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.bill-item .bill-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bill-item .bill-amount {
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.bill-item .bill-due-date {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.bill-upcoming {
+  border-left: 3px solid #e74c3c;
+}
+
+.delete-bill {
+  background: none;
+  border: none;
+  padding: 5px;
+  margin: 0;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s;
+  width: auto;
+  box-shadow: none;
+}
+
+.delete-bill:hover {
+  color: #e74c3c;
+  transform: none;
+  box-shadow: none;
+}
+
+.delete-bill i {
+  font-size: 1rem;
+  color: inherit;
 }
 
 

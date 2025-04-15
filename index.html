@@ -35,8 +35,8 @@
 <body>
   <h1><i class="fas fa-wallet"></i> Budget Buddy!</h1>
   <p>
-    Enter your income and next pay date to see how much you can spend between
-    now and then.
+    Enter your income, next pay date, and expenses to see how much you can spend between
+    now and your next pay date.
   </p>
   <form id="budget-form">
     <div class="form-row">
@@ -57,6 +57,7 @@
     <form id="bill-form">
       <input type="text" id="bill-name" placeholder="Name" required />
       <input type="number" id="bill-amount" placeholder="Amount" required />
+      <input type="date" id="bill-due-date" placeholder="Due Date" required />
       <button type="submit" id="add-bill"><i class="fas fa-plus"></i> Add</button>
     </form>
     <ul id="bill-list"></ul>
