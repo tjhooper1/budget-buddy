@@ -1,7 +1,7 @@
 // Register Service Worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')  // Fixed path to be relative
+        navigator.serviceWorker.register('./sw.js')  // Updated to be relative to current path
             .then(registration => {
                 console.log('ServiceWorker registration successful');
             })
