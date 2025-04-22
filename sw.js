@@ -1,14 +1,16 @@
 const CACHE_NAME = 'budget-buddy-v1';
 const ASSETS_TO_CACHE = [
-    '/budget-buddy/',
-    '/budget-buddy/index.html',
-    '/budget-buddy/styles.css',
-    '/budget-buddy/scripts.js',
-    '/budget-buddy/assets/favicon/favicon-16x16.png',
-    '/budget-buddy/assets/favicon/favicon-32x32.png',
-    '/budget-buddy/assets/favicon/apple-touch-icon.png',
-    '/budget-buddy/assets/favicon/android-chrome-192x192.png',
-    '/budget-buddy/assets/favicon/android-chrome-512x512.png',
+    '/',
+    '/index.html',
+    '/styles.css',
+    '/scripts.js',
+    '/pwa.js',
+    '/sw.js',
+    '/assets/favicon/favicon-16x16.png',
+    '/assets/favicon/favicon-32x32.png',
+    '/assets/favicon/apple-touch-icon.png',
+    '/assets/favicon/android-chrome-192x192.png',
+    '/assets/favicon/android-chrome-512x512.png',
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'
 ];
