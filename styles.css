@@ -1,11 +1,15 @@
 :root {
-  --primary-color: #4361ee;
-  --secondary-color: #3a0ca3;
-  --background-color: #f8f9fa;
-  --text-color: #333;
-  --success-color: #2ecc71;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --border-radius: 8px;
+  --primary-color: #ff9a76; /* Sunset orange */
+  --secondary-color: #ff7e5f; /* Deeper sunset orange */
+  --accent-color: #ffd166; /* Golden sun */
+  --background-color: #eaf7ff; /* Light blue sky */
+  --card-bg-color: #ffffff; /* White sand */
+  --text-color: #38618c; /* Deep ocean blue */
+  --dark-text: #2a4365; /* Deeper ocean blue */
+  --success-color: #06d6a0; /* Tropical teal */
+  --error-color: #ef476f; /* Coral red */
+  --shadow: 0 8px 20px rgba(56, 97, 140, 0.1);
+  --border-radius: 12px;
   --font-heading: "Montserrat", sans-serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -19,74 +23,156 @@
 }
 
 body {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, #eaf7ff 0%, #c6e4f9 100%);
   color: var(--text-color);
   line-height: 1.6;
   padding: 20px;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-weight: 400;
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Beach overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80");
+  background-size: cover;
+  background-position: bottom;
+  opacity: 0.1;
+  z-index: -1;
 }
 
 h1 {
-  color: var(--primary-color);
-  margin-bottom: 30px;
+  color: var(--dark-text);
+  margin-bottom: 20px;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-family: var(--font-heading);
   font-weight: 700;
   letter-spacing: -0.02em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-bottom: 15px;
+}
+
+h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--accent-color),
+    var(--primary-color)
+  );
+  border-radius: 4px;
 }
 
 h1 i {
-  margin-right: 10px;
-  color: var(--secondary-color);
+  margin-right: 15px;
+  color: var(--primary-color);
+  font-size: 2.6rem;
 }
 
 p {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.7;
+  color: var(--dark-text);
+}
+
+.card {
+  background-color: var(--card-bg-color);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  position: relative;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--accent-color),
+    var(--primary-color)
+  );
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  background-color: white;
+  gap: 20px;
+  background-color: var(--card-bg-color);
   padding: 30px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--accent-color),
+    var(--primary-color)
+  );
 }
 
 label {
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   display: block;
   font-size: 0.95rem;
   letter-spacing: 0.01em;
+  color: var(--dark-text);
 }
 
 input {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
+  padding: 14px 18px;
+  border: 1px solid #e2e8f0;
   border-radius: var(--border-radius);
   font-size: 1rem;
   width: 100%;
-  transition: border-color 0.3s;
+  transition: all 0.3s;
   font-family: var(--font-body);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 154, 118, 0.2);
+  background-color: white;
 }
 
 button {
@@ -97,22 +183,44 @@ button {
   );
   color: white;
   border: none;
-  padding: 14px 24px;
+  padding: 16px 24px;
   border-radius: var(--border-radius);
   cursor: pointer;
   font-size: 1.05rem;
   font-weight: 600;
   transition: all 0.3s ease;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 10px;
   letter-spacing: 0.02em;
   font-family: var(--font-heading);
-  box-shadow: 0 2px 8px rgba(67, 97, 238, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 154, 118, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: all 0.6s;
 }
 
 button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(255, 154, 118, 0.4);
+}
+
+button:hover::before {
+  left: 100%;
 }
 
 button:active {
@@ -120,14 +228,9 @@ button:active {
 }
 
 #result {
-  margin-top: 20px;
-  padding: 0 20px;
-  margin-bottom: 20px;
-}
-
-#result {
-  background-color: white;
+  margin: 30px 0;
   padding: 30px;
+  background-color: var(--card-bg-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   text-align: center;
@@ -137,24 +240,24 @@ button:active {
 }
 
 .error-message {
-  background-color: white;
+  background-color: var(--card-bg-color);
   padding: 30px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   text-align: center;
-  border-left: 5px solid #e74c3c;
+  border-left: 5px solid var(--error-color);
   animation: fadeIn 0.5s ease-in-out;
   position: relative;
   overflow: hidden;
 }
 
 .error-message p {
-  color: #e74c3c !important;
+  color: var(--error-color) !important;
   font-weight: 500 !important;
 }
 
 .result-animation {
-  animation: slideUp 0.2s ease-in-out;
+  animation: slideUp 0.3s ease-in-out;
 }
 
 @keyframes slideUp {
@@ -179,11 +282,12 @@ button:active {
 
 #result p {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   font-family: var(--font-body);
   letter-spacing: -0.01em;
   text-align: center;
+  color: var(--dark-text);
 }
 
 .bills-summary {
@@ -192,14 +296,14 @@ button:active {
   background-color: transparent;
   padding: 0 0 20px 0;
   text-align: left;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid rgba(56, 97, 140, 0.2);
 }
 
 .bills-header {
-  font-size: 1.1rem !important;
+  font-size: 1.2rem !important;
   font-weight: 600;
   margin-bottom: 15px !important;
-  color: var(--text-color);
+  color: var(--dark-text);
   padding-bottom: 8px;
   text-align: left;
 }
@@ -208,9 +312,9 @@ button:active {
   text-align: left;
   margin-bottom: 25px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #e6e6e6;
-  font-size: 0.95rem;
-  color: #666;
+  border-bottom: 1px solid rgba(56, 97, 140, 0.2);
+  font-size: 1rem;
+  color: #697a91;
   font-weight: normal;
 }
 
@@ -223,10 +327,10 @@ button:active {
 .bills-list li {
   display: grid;
   grid-template-columns: auto 1fr auto auto;
-  gap: 10px;
+  gap: 15px;
   align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(56, 97, 140, 0.1);
 }
 
 .bills-list li i {
@@ -260,24 +364,46 @@ button:active {
   );
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 14px 22px;
   border-radius: var(--border-radius);
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(67, 97, 238, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 154, 118, 0.3);
   z-index: 1000;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   width: auto;
   margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.install-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: all 0.6s;
 }
 
 .install-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(255, 154, 118, 0.4);
+}
+
+.install-button:hover::before {
+  left: 100%;
 }
 
 .install-button i {
@@ -285,26 +411,69 @@ button:active {
 }
 
 #bills {
-  background-color: white;
+  background-color: var(--card-bg-color);
   padding: 30px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   gap: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+#bills::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--accent-color)
+  );
 }
 
 #bills h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: var(--dark-text);
+  position: relative;
+  padding-bottom: 10px;
+}
+
+#bills h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    var(--accent-color),
+    var(--primary-color)
+  );
+  border-radius: 3px;
 }
 
 #bill-form {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 20px;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  border: none;
+}
+
+#bill-form::before {
+  display: none;
 }
 
 #add-bill {
@@ -316,17 +485,17 @@ button:active {
   #bill-form {
     grid-template-columns: 1fr;
   }
-  
+
   #add-bill {
     grid-column: 1;
   }
 }
 
 .bill-item {
-  background-color: #f8f9fa;
-  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 18px;
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 10px rgba(56, 97, 140, 0.08);
   display: grid;
   grid-template-columns: auto 1fr auto auto auto;
   gap: 15px;
@@ -334,50 +503,65 @@ button:active {
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: -0.01em;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bill-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(56, 97, 140, 0.12);
 }
 
 .bill-item i {
   font-size: 1.2rem;
   color: var(--primary-color);
+  width: 24px;
+  text-align: center;
 }
 
 .bill-item .bill-name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: var(--dark-text);
+  font-weight: 600;
 }
 
 .bill-item .bill-amount {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--secondary-color);
+  text-align: right;
 }
 
 .bill-item .bill-due-date {
   font-size: 0.9rem;
-  color: #666;
+  color: #697a91;
+  white-space: nowrap;
 }
 
 .bill-upcoming {
-  border-left: 3px solid #e74c3c;
+  border-left: 3px solid var(--error-color);
 }
 
 .delete-bill {
-  background: none;
-  border: none;
-  padding: 5px;
-  margin: 0;
+  background: none !important;
+  border: none !important;
+  padding: 5px !important;
+  margin: 0 !important;
   cursor: pointer;
-  color: #ccc;
+  color: #ccc !important;
   transition: color 0.2s;
-  width: auto;
-  box-shadow: none;
+  width: auto !important;
+  min-width: auto !important;
+  box-shadow: none !important;
+  flex-shrink: 0;
 }
 
 .delete-bill:hover {
-  color: #e74c3c;
-  transform: none;
-  box-shadow: none;
+  color: var(--error-color) !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 .delete-bill i {
@@ -385,4 +569,220 @@ button:active {
   color: inherit;
 }
 
+#purchases {
+  background-color: var(--card-bg-color);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
 
+#purchases::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--accent-color),
+    var(--secondary-color)
+  );
+}
+
+#purchases h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--dark-text);
+  position: relative;
+  padding-bottom: 10px;
+}
+
+#purchases h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    var(--accent-color),
+    var(--secondary-color)
+  );
+  border-radius: 3px;
+}
+
+#purchase-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  border: none;
+}
+
+#purchase-form::before {
+  display: none;
+}
+
+#purchase-form input[type="text"],
+#purchase-form input[type="number"] {
+  flex: 1 1 120px;
+  min-width: 0;
+}
+
+#purchase-form button,
+#bill-form button[type="submit"] {
+  flex: 0 0 auto;
+  width: auto;
+  margin-top: 0;
+  min-width: 120px;
+}
+
+#purchase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#purchase-list li:last-child {
+  margin-bottom: 0;
+}
+
+#purchase-list li .purchase-content span {
+  display: block;
+  color: var(--dark-text);
+  margin-bottom: 3px;
+}
+
+#purchase-list li .purchase-content strong {
+  color: var(--secondary-color);
+  font-size: 1.05rem;
+}
+
+#purchase-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(56, 97, 140, 0.08);
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+#purchase-list li .purchase-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.delete-purchase {
+  background: none !important;
+  border: none !important;
+  color: #ccc !important;
+  cursor: pointer;
+  padding: 6px 10px !important;
+  border-radius: 6px;
+  transition: all 0.2s;
+  width: auto !important;
+  min-width: auto !important;
+  box-shadow: none !important;
+  margin-top: 0 !important;
+  margin-left: 8px !important;
+  flex-shrink: 0;
+}
+
+.delete-purchase:hover {
+  color: var(--error-color) !important;
+  background-color: rgba(239, 71, 111, 0.1) !important;
+  transform: none !important;
+}
+
+/* Grid container */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #purchases,
+  #bills {
+    height: fit-content;
+    margin: 0;
+  }
+
+  body {
+    padding: 30px;
+  }
+
+  h1 {
+    font-size: 3.2rem;
+    margin-bottom: 25px;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  #purchases,
+  #bills {
+    margin-top: 20px;
+  }
+
+  body {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+  }
+
+  #purchase-form button,
+  #bill-form button[type="submit"] {
+    width: 100%;
+  }
+}
+
+/* Update bill list to handle new item structure */
+#bill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+#bill-list li {
+  list-style: none;
+}
+
+/* Make sure "No bills added yet" message looks nice */
+#bill-list li:only-child {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  color: #697a91;
+  font-style: italic;
+}
