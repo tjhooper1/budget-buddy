@@ -544,7 +544,8 @@ button:active {
   border-left: 3px solid var(--error-color);
 }
 
-.delete-bill {
+.delete-bill,
+.delete-purchase {
   background: none !important;
   border: none !important;
   padding: 5px !important;
@@ -558,13 +559,15 @@ button:active {
   flex-shrink: 0;
 }
 
-.delete-bill:hover {
+.delete-bill:hover,
+.delete-purchase:hover {
   color: var(--error-color) !important;
   transform: none !important;
   box-shadow: none !important;
 }
 
-.delete-bill i {
+.delete-bill i,
+.delete-purchase i {
   font-size: 1rem;
   color: inherit;
 }
@@ -574,6 +577,9 @@ button:active {
   padding: 30px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   border: 1px solid rgba(255, 255, 255, 0.8);
   position: relative;
   overflow: hidden;
@@ -588,8 +594,8 @@ button:active {
   height: 4px;
   background: linear-gradient(
     to right,
-    var(--accent-color),
-    var(--secondary-color)
+    var(--primary-color),
+    var(--accent-color)
   );
 }
 
@@ -612,16 +618,16 @@ button:active {
   background: linear-gradient(
     to right,
     var(--accent-color),
-    var(--secondary-color)
+    var(--primary-color)
   );
   border-radius: 3px;
 }
 
 #purchase-form {
-  display: flex;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
   background: transparent;
   padding: 0;
   box-shadow: none;
@@ -632,16 +638,29 @@ button:active {
   display: none;
 }
 
+#add-purchase {
+  grid-column: span 3;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  #purchase-form {
+    grid-template-columns: 1fr;
+  }
+
+  #add-purchase {
+    grid-column: 1;
+  }
+}
+
+/* Remove the now unnecessary flex styling */
 #purchase-form input[type="text"],
 #purchase-form input[type="number"] {
-  flex: 1 1 120px;
-  min-width: 0;
+  width: 100%;
 }
 
 #purchase-form button,
 #bill-form button[type="submit"] {
-  flex: 0 0 auto;
-  width: auto;
   margin-top: 0;
   min-width: 120px;
 }
@@ -651,6 +670,8 @@ button:active {
   flex-direction: column;
   gap: 10px;
   margin-top: 10px;
+  list-style: none;
+  padding: 0;
 }
 
 #purchase-list li:last-child {
@@ -661,53 +682,40 @@ button:active {
   display: block;
   color: var(--dark-text);
   margin-bottom: 3px;
+  font-weight: 600;
 }
 
 #purchase-list li .purchase-content strong {
   color: var(--secondary-color);
   font-size: 1.05rem;
+  font-weight: 700;
 }
 
 #purchase-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 15px;
-  margin-bottom: 10px;
-  border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 2px 8px rgba(56, 97, 140, 0.08);
+  padding: 18px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 10px rgba(56, 97, 140, 0.08);
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 15px;
+  align-items: center;
   font-size: 1rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 0;
   border: 1px solid rgba(255, 255, 255, 0.9);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#purchase-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(56, 97, 140, 0.12);
 }
 
 #purchase-list li .purchase-content {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-}
-
-.delete-purchase {
-  background: none !important;
-  border: none !important;
-  color: #ccc !important;
-  cursor: pointer;
-  padding: 6px 10px !important;
-  border-radius: 6px;
-  transition: all 0.2s;
-  width: auto !important;
-  min-width: auto !important;
-  box-shadow: none !important;
-  margin-top: 0 !important;
-  margin-left: 8px !important;
-  flex-shrink: 0;
-}
-
-.delete-purchase:hover {
-  color: var(--error-color) !important;
-  background-color: rgba(239, 71, 111, 0.1) !important;
-  transform: none !important;
 }
 
 /* Grid container */
@@ -726,7 +734,6 @@ button:active {
 
   #purchases,
   #bills {
-    height: fit-content;
     margin: 0;
   }
 
@@ -777,12 +784,13 @@ button:active {
   list-style: none;
 }
 
-/* Make sure "No bills added yet" message looks nice */
-#bill-list li:only-child {
+#bill-list li:only-child,
+#purchase-list li:only-child {
   background-color: rgba(255, 255, 255, 0.5);
   padding: 15px;
   border-radius: var(--border-radius);
   text-align: center;
   color: #697a91;
   font-style: italic;
+  display: block;
 }

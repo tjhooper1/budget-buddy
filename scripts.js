@@ -503,37 +503,28 @@ function updatePurchasesUI() {
     const purchases = getPurchases();
     const list = document.getElementById('purchase-list');
     list.innerHTML = '';
+    
+    if (purchases.length === 0) {
+        list.innerHTML = '<li>No purchases added yet.</li>';
+        return;
+    }
+    
     purchases.forEach((purchase, idx) => {
-        const li = document.createElement('li');
-
-        const contentDiv = document.createElement('div');
-        contentDiv.className = 'purchase-content';
-
-        if (purchase.desc) {
-            const descEl = document.createElement('span');
-            descEl.textContent = purchase.desc;
-            contentDiv.appendChild(descEl);
-        }
-
-        const amountEl = document.createElement('strong');
-        amountEl.textContent = `$${purchase.amount.toFixed(2)}`;
-        contentDiv.appendChild(amountEl);
-
-        li.appendChild(contentDiv);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.className = 'delete-purchase';
-        deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-        deleteButton.dataset.idx = idx;
-        deleteButton.title = "Remove";
-
-        li.appendChild(deleteButton);
-        list.appendChild(li);
+        const purchaseHtml = `
+            <div class="bill-item">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="bill-name">${purchase.desc || 'Purchase'}</div>
+                <div class="bill-amount">$${parseFloat(purchase.amount).toFixed(2)}</div>
+                <div class="bill-due-date"></div>
+                <button class="delete-purchase" title="Delete Purchase" data-idx="${idx}"><i class="fas fa-times"></i></button>
+            </div>
+        `;
+        list.innerHTML += purchaseHtml;
     });
-
+    
     // Add delete event listeners
     list.querySelectorAll('.delete-purchase').forEach(btn => {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function() {
             deletePurchase(parseInt(this.dataset.idx));
         });
     });
